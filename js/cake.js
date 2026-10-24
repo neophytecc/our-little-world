@@ -185,3 +185,5 @@
 
   window.PartyCake = { init: initCake };
 })();
+
+document.addEventListener("DOMContentLoaded", initCake);
