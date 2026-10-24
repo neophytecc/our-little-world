@@ -2561,3 +2561,488 @@ img {
     height: 62px !important;
   }
 }
+
+
+/* =====================================================
+   OUR LITTLE WORLD — RESPONSIVE ROOM LAYOUT
+   Keep this section at the VERY BOTTOM of styles.css
+   ===================================================== */
+
+:root {
+  --room-width: min(88vw, 112svh);
+  --room-gap: clamp(0.4rem, 1.2vw, 1rem);
+}
+
+/* Prevent the page itself from creating horizontal scroll */
+html {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: clip;
+}
+
+body {
+  width: 100%;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  overflow-x: clip;
+}
+
+#app {
+  width: 100%;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
+}
+
+/* Keep the welcome page responsive */
+.welcome-screen {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(1rem, 4vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pixel-frame {
+  width: min(100%, 48rem);
+  box-sizing: border-box;
+}
+
+/* Main room page: centered content, no fixed-width container */
+#birthday-room.birthday-room {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: clamp(0.5rem, 1.5vw, 1.25rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--room-gap);
+}
+
+/* Header fills the available page width */
+#birthday-room .room-header {
+  width: min(100%, 90rem);
+  box-sizing: border-box;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+/* Intro stays centered and scales smoothly */
+#birthday-room .room-intro {
+  width: min(100%, 70rem);
+  margin: 0 auto;
+  text-align: center;
+}
+
+#birthday-room .room-intro h2 {
+  font-size: clamp(0.95rem, 2vw, 1.8rem);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+#birthday-room .room-intro p {
+  font-size: clamp(0.65rem, 1vw, 0.9rem);
+}
+
+/* Balloon instructions should not force the room to shrink */
+#birthday-room .room-section {
+  width: min(100%, 70rem);
+  box-sizing: border-box;
+  margin-inline: auto;
+  text-align: center;
+}
+
+#birthday-room .room-section h2 {
+  font-size: clamp(0.7rem, 1.4vw, 1rem);
+}
+
+#birthday-room .room-section p {
+  font-size: clamp(0.6rem, 0.9vw, 0.8rem);
+}
+
+/* The room is the main responsive canvas.
+   Keep the original 5:4 proportions. */
+#room-scene.room-scene {
+  position: relative;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+
+  width: min(88vw, 112svh);
+  max-width: 100%;
+  min-width: 0;
+
+  aspect-ratio: 5 / 4;
+  height: auto;
+  min-height: 0;
+  max-height: 70svh;
+
+  margin: 0 auto;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* All room coordinates are relative to the scene */
+#room-scene *,
+#room-scene *::before,
+#room-scene *::after {
+  box-sizing: border-box;
+}
+
+/* Pixel art stays crisp */
+#room-scene img,
+#room-scene .room-cat,
+#room-scene .room-table-art,
+#room-scene .cake-illustration,
+#room-scene .room-photobooth img {
+  image-rendering: pixelated;
+}
+
+/* Wall notes scale with the room */
+#room-scene #room-sticky-wall {
+  position: absolute;
+  inset: 3% 2% 22%;
+  min-width: 0;
+  min-height: 0;
+}
+
+#room-scene #room-sticky-wall .sticky {
+  width: clamp(3.4rem, 8.5cqw, 7.2rem);
+  min-width: 0;
+  min-height: clamp(2rem, 5.5cqw, 4.2rem);
+  padding: clamp(0.2rem, 0.7cqw, 0.6rem);
+  font-size: clamp(0.35rem, 0.85cqw, 0.7rem);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+/* Container query units above depend on room size.
+   Provide a fallback for browsers without them. */
+@supports not (width: 1cqw) {
+  #room-scene #room-sticky-wall .sticky {
+    width: clamp(3.4rem, 8vw, 7.2rem);
+    min-height: clamp(2rem, 5vw, 4.2rem);
+    padding: clamp(0.2rem, 0.6vw, 0.6rem);
+    font-size: clamp(0.35rem, 0.8vw, 0.7rem);
+  }
+}
+
+/* Balloons remain inside the scene */
+#room-scene #balloon-area {
+  position: absolute;
+  top: 28%;
+  left: 3%;
+  width: 44%;
+  height: 36%;
+  min-height: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
+  gap: clamp(0.2rem, 1vw, 0.8rem);
+  overflow: visible;
+}
+
+#room-scene #balloon-area .birthday-balloon {
+  flex: 0 1 clamp(1.3rem, 5.5cqw, 3.2rem);
+  width: clamp(1.3rem, 5.5cqw, 3.2rem);
+  height: clamp(2.6rem, 10cqw, 5.8rem);
+  min-width: 0;
+}
+
+#room-scene #balloon-area .balloon-image {
+  display: block;
+  width: 100%;
+  height: 78%;
+  object-fit: contain;
+  background: transparent;
+  border: 0;
+}
+
+/* Table and chairs: one actual image, centered */
+#room-scene .room-table-art {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 3%;
+  display: block;
+
+  width: 62%;
+  max-width: 90%;
+  max-height: 43%;
+  height: auto;
+
+  object-fit: contain;
+  object-position: center bottom;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Photo booth scales relative to the scene */
+#room-scene #room-photobooth {
+  position: absolute;
+  z-index: 4;
+  left: 3%;
+  bottom: 4%;
+  width: 13%;
+  max-width: 20%;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#room-scene #room-photobooth img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Cake is positioned proportionally above the table */
+#room-scene #cake-area {
+  position: absolute !important;
+  z-index: 8;
+  left: 50% !important;
+  bottom: 22%;
+  width: 20%;
+  max-width: 10rem;
+  min-width: 0;
+  transform: translateX(-50%) !important;
+  text-align: center;
+  pointer-events: auto;
+}
+
+#room-scene #cake-area h3 {
+  margin: 0 0 0.25em;
+  font-size: clamp(0.35rem, 1.1cqw, 0.8rem);
+  line-height: 1.4;
+}
+
+#room-scene #cake-area .cake-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+#room-scene #cake-area .cake-candles {
+  display: none !important;
+}
+
+#room-scene #cake-area .cake-illustration {
+  display: block;
+  width: clamp(2.5rem, 10cqw, 6rem);
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background: transparent;
+  image-rendering: pixelated;
+}
+
+#room-scene #cake-area .object-caption {
+  margin: 0.3em 0 0;
+  font-size: clamp(0.35rem, 0.85cqw, 0.7rem);
+  line-height: 1.5;
+}
+
+/* Cats move and scale with the scene */
+#room-scene #room-cats {
+  position: absolute;
+  z-index: 9;
+  left: 10%;
+  right: 10%;
+  bottom: 4%;
+  height: 12%;
+  pointer-events: none;
+}
+
+#room-scene #room-cats .room-cat {
+  position: absolute;
+  bottom: 0;
+  width: clamp(1.3rem, 6cqw, 3.5rem);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  image-rendering: pixelated;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* The animation endpoints use proportional cat sizes */
+@keyframes room-cat-one-walk {
+  from { left: 0; transform: scaleX(1); }
+  49% { transform: scaleX(1); }
+  50% { transform: scaleX(-1); }
+  to { left: 88%; transform: scaleX(-1); }
+}
+
+@keyframes room-cat-two-walk {
+  from { left: 88%; transform: scaleX(-1); }
+  49% { transform: scaleX(-1); }
+  50% { transform: scaleX(1); }
+  to { left: 0; transform: scaleX(1); }
+}
+
+/* Floor scales with the scene */
+#room-scene .room-floor {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5%;
+  min-height: 0;
+  pointer-events: none;
+}
+
+/* Activity buttons wrap instead of overflowing */
+#birthday-room .room-navigation {
+  width: min(100%, 70rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.35rem, 1vw, 0.8rem);
+  margin: 0 auto;
+}
+
+#birthday-room .activity-button {
+  max-width: 100%;
+  font-size: clamp(0.55rem, 0.9vw, 0.8rem);
+  overflow-wrap: anywhere;
+}
+
+/* Hidden panels must remain hidden */
+#birthday-room[hidden],
+#memories-panel[hidden],
+#photobooth-panel[hidden] {
+  display: none !important;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  #birthday-room.birthday-room {
+    padding: 0.75rem;
+  }
+
+  #room-scene.room-scene {
+    width: min(94vw, 112svh);
+    max-height: 68svh;
+  }
+
+  #room-scene .room-table-art {
+    width: 66%;
+  }
+
+  #room-scene #cake-area {
+    bottom: 21%;
+  }
+}
+
+/* Mobile portrait */
+@media (max-width: 600px) {
+  #birthday-room.birthday-room {
+    padding: 0.5rem;
+    gap: 0.6rem;
+  }
+
+  #birthday-room .room-header {
+    flex-wrap: wrap;
+  }
+
+  #birthday-room .room-intro h2 {
+    font-size: clamp(0.8rem, 4vw, 1.2rem);
+  }
+
+  #room-scene.room-scene {
+    width: min(96vw, 62svh);
+    max-width: 100%;
+    max-height: 62svh;
+    aspect-ratio: 5 / 4;
+  }
+
+  #room-scene #room-sticky-wall {
+    inset: 3% 1% 22%;
+  }
+
+  #room-scene #balloon-area {
+    top: 30%;
+    left: 2%;
+    width: 45%;
+    height: 32%;
+  }
+
+  #room-scene .room-table-art {
+    width: 68%;
+    max-height: 42%;
+  }
+
+  #room-scene #room-photobooth {
+    width: 12%;
+    left: 2%;
+    bottom: 5%;
+  }
+
+  #room-scene #cake-area {
+    width: 21%;
+    bottom: 22%;
+  }
+
+  #room-scene #room-cats {
+    left: 8%;
+    right: 8%;
+    bottom: 4%;
+  }
+
+  #birthday-room .activity-button {
+    font-size: clamp(0.5rem, 2.3vw, 0.7rem);
+  }
+}
+
+/* Very short landscape screens */
+@media (max-height: 500px) and (orientation: landscape) {
+  #birthday-room.birthday-room {
+    gap: 0.35rem;
+    padding: 0.35rem;
+  }
+
+  #room-scene.room-scene {
+    width: min(78vw, 112svh);
+    max-height: 58svh;
+  }
+
+  #birthday-room .room-intro p {
+    margin: 0.25rem;
+  }
+
+  #birthday-room .room-section {
+    margin: 0;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  #room-scene #room-cats .room-cat,
+  #room-scene #balloon-area .birthday-balloon {
+    animation: none !important;
+  }
+}
