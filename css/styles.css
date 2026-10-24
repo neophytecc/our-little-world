@@ -3097,3 +3097,66 @@ body {
     position: relative;
     z-index: 2;
 }
+
+
+/* ===== FIX: FLOATING WELCOME SCREEN DECORATIONS ===== */
+
+/* Keep the decoration layer attached to the welcome screen */
+#welcome-screen #welcome-decorations {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Randomly positioned particles must be removed from normal flow */
+#welcome-screen #welcome-decorations > span {
+  position: absolute !important;
+  display: block;
+  left: 50%;
+  top: 50%;
+  width: max-content;
+  height: max-content;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation-name: welcome-particle-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Restore the floating movement */
+#welcome-screen #welcome-decorations .pixel-star {
+  color: #ff304d;
+}
+
+#welcome-screen #welcome-decorations .floating-heart {
+  color: #ff526b;
+}
+
+#welcome-screen #welcome-decorations .floating-sparkle {
+  color: #ffd6df;
+}
+
+@keyframes welcome-particle-float {
+  0%, 100% {
+    transform: translate3d(-50%, -50%, 0) translateY(0) rotate(-8deg);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate3d(-50%, -50%, 0) translateY(-16px) rotate(8deg);
+    opacity: 1;
+  }
+}
+
+/* Keep the welcome card in its existing centered position */
+#welcome-screen .pixel-frame {
+  position: relative;
+  z-index: 2;
+}
