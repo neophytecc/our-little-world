@@ -3160,3 +3160,51 @@ body {
   position: relative;
   z-index: 2;
 }
+
+
+/* FINAL OVERRIDE: RESTORE RANDOM PARTICLE POSITIONS */
+
+#welcome-screen #welcome-decorations {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+#welcome-screen #welcome-decorations > span {
+  position: absolute !important;
+  display: block !important;
+
+  /* Preserve random inline left/top values set by main.js */
+  left: unset;
+  top: unset;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  width: max-content;
+  height: max-content;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none !important;
+
+  animation-name: welcome-particle-float-fixed !important;
+  animation-timing-function: ease-in-out !important;
+  animation-iteration-count: infinite !important;
+}
+
+@keyframes welcome-particle-float-fixed {
+  0%, 100% {
+    transform: translateY(0) rotate(-8deg);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(8deg);
+    opacity: 1;
+  }
+}
