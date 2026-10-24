@@ -2477,3 +2477,87 @@ img {
   }
 }
 
+
+/* ===== FINAL FIXES: TABLE, CAKE AND CATS ===== */
+
+/* Remove the extra table drawn by the CSS.
+   Keep the real px-table-chairs.png image in index.html. */
+#room-scene::before {
+  content: none !important;
+  background: none !important;
+}
+
+/* Hide emoji candles: px-cake.png already contains its own candles. */
+#cake-area .cake-candles {
+  display: none !important;
+}
+
+/* Center the cake over the middle of the table. */
+#room-scene #cake-area {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 125px !important;
+  width: 120px !important;
+  transform: translateX(-50%) !important;
+  z-index: 8 !important;
+  text-align: center;
+  pointer-events: auto;
+}
+
+#cake-area h3 {
+  margin: 0 0 5px;
+}
+
+#cake-area .cake-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+#cake-area .cake-illustration {
+  display: block;
+  width: 76px !important;
+  height: 76px !important;
+  object-fit: contain;
+  background: none !important;
+  cursor: pointer;
+  image-rendering: pixelated;
+  pointer-events: auto;
+}
+
+#cake-area .object-caption {
+  margin: 4px 0 0;
+}
+
+/* Make the two existing cats clickable. */
+#room-cats {
+  z-index: 9 !important;
+  pointer-events: none;
+}
+
+#room-cats .room-cat {
+  pointer-events: auto !important;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.15s;
+}
+
+#room-cats .room-cat:active {
+  filter: brightness(1.5);
+}
+
+/* Mobile cake position */
+@media (max-width: 600px) {
+  #room-scene #cake-area {
+    bottom: 105px !important;
+  }
+
+  #cake-area .cake-illustration {
+    width: 62px !important;
+    height: 62px !important;
+  }
+}
