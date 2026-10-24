@@ -1860,3 +1860,243 @@ img {
     bottom: 28px;
   }
 }
+
+
+/* ===== FINAL ROOM LAYOUT FIX ===== */
+
+#room-scene.room-scene {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #080d27;
+  background-image:
+    radial-gradient(circle at 15% 18%, #fff3c4 0 1px, transparent 2px),
+    radial-gradient(circle at 28% 32%, #ffc5dd 0 1px, transparent 2px),
+    radial-gradient(circle at 70% 15%, #fff3c4 0 1px, transparent 2px),
+    radial-gradient(circle at 83% 28%, #ffffff 0 1px, transparent 2px),
+    radial-gradient(circle at 45% 12%, #c4d7ff 0 1px, transparent 2px),
+    radial-gradient(ellipse at 50% 0%, #33235e 0%, #11152f 55%, #080b1c 100%);
+  border: 4px solid #c6283d;
+}
+
+/* Center the window on the back wall */
+#room-scene .room-window {
+  position: absolute;
+  z-index: 0;
+  top: 24px;
+  left: 50%;
+  right: auto;
+  width: 120px;
+  height: 120px;
+  transform: translateX(-50%);
+  border: 6px solid #080608;
+  background: #17183d;
+  box-shadow: inset 0 0 0 4px #a52635;
+}
+
+/* Keep notes on the wall behind the furniture */
+#room-sticky-wall {
+  position: absolute;
+  inset: 12px 12px 145px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+#room-sticky-wall .sticky {
+  position: absolute;
+  width: 115px;
+  min-width: 0;
+  min-height: 65px;
+  padding: 10px;
+  font-size: 9px;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+#room-sticky-wall .sticky:nth-child(1) { top: 15%; left: 4%; }
+#room-sticky-wall .sticky:nth-child(2) { top: 8%; left: 25%; }
+#room-sticky-wall .sticky:nth-child(3) { top: 27%; left: 68%; }
+#room-sticky-wall .sticky:nth-child(4) { top: 12%; right: 3%; }
+#room-sticky-wall .sticky:nth-child(5) { top: 53%; left: 10%; }
+#room-sticky-wall .sticky:nth-child(6) { top: 50%; left: 35%; }
+#room-sticky-wall .sticky:nth-child(7) { top: 53%; right: 20%; }
+#room-sticky-wall .sticky:nth-child(8) { top: 50%; right: 3%; }
+
+/* Hide duplicate emoji pet; use the two image cats instead */
+#room-cats {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  bottom: 35px;
+  height: 70px;
+  pointer-events: none;
+}
+
+#room-cats .room-cat {
+  position: absolute;
+  bottom: 0;
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+#room-cats .room-cat-one { left: 34%; }
+#room-cats .room-cat-two { right: 24%; }
+
+/* Hide the old interactive emoji cat so it won't overlap */
+#pet-area {
+  display: none !important;
+}
+
+/* One table/chair image only, centered in the room */
+#room-scene .room-table-art {
+  position: absolute;
+  z-index: 3;
+  display: block;
+  width: min(38%, 330px);
+  max-height: 200px;
+  height: auto;
+  object-fit: contain;
+  left: 50%;
+  bottom: 35px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Cake sits visually on top of the table */
+#room-scene #cake-area {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 103px;
+  width: 150px;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+#cake-area h3 {
+  margin: 0 0 6px;
+  font-size: 10px;
+}
+
+#cake-area .cake-button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+#cake-area .cake-illustration {
+  display: block;
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  font-size: 0;
+  image-rendering: pixelated;
+}
+
+#cake-area .cake-candles {
+  position: relative;
+  z-index: 2;
+  font-size: 17px;
+  line-height: 1;
+}
+
+#cake-area .cake-button.blown .cake-candles {
+  opacity: 0.25;
+  filter: grayscale(1);
+}
+
+#cake-area .object-caption {
+  margin: 4px 0 0;
+  font-size: 9px;
+}
+
+/* Photo booth asset in the room */
+#room-photobooth {
+  position: absolute;
+  z-index: 3;
+  left: 3%;
+  bottom: 35px;
+  width: 100px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+#room-photobooth img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Keep balloons above the furniture */
+#balloon-area {
+  z-index: 4;
+}
+
+/* Prevent the floor from covering the objects */
+#room-scene .room-floor {
+  z-index: 6;
+  pointer-events: none;
+}
+
+#room-scene .room-window {
+  pointer-events: none;
+}
+
+/* Don't let the page jump back to the welcome screen */
+#birthday-room[hidden],
+#memories-panel[hidden],
+#photobooth-panel[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+  #room-scene.room-scene { min-height: 430px; }
+
+  #room-scene .room-window {
+    width: 85px;
+    height: 95px;
+  }
+
+  #room-scene .room-table-art {
+    width: 55%;
+    bottom: 35px;
+  }
+
+  #room-scene #cake-area {
+    bottom: 95px;
+  }
+
+  #room-cats .room-cat {
+    width: 42px;
+    height: 42px;
+  }
+
+  #room-cats .room-cat-one { left: 28%; }
+  #room-cats .room-cat-two { right: 14%; }
+
+  #room-photobooth {
+    width: 68px;
+    left: 2%;
+  }
+
+  #room-sticky-wall .sticky {
+    width: 76px;
+    min-height: 48px;
+    padding: 5px;
+    font-size: 7px;
+  }
+}
