@@ -184,6 +184,12 @@
   }
 
   window.PartyCake = { init: initCake };
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCake);
+} else {
+  initCake();
+}
 })();
 
 document.addEventListener("DOMContentLoaded", initCake);
