@@ -281,6 +281,48 @@
         document.getElementById("camera-modal")?.close();
       }
     });
+
+    // Make the two room cats interactive.
+document.querySelectorAll("#room-cats .room-cat").forEach(function (cat, index) {
+  cat.style.cursor = "pointer";
+  cat.setAttribute("tabindex", "0");
+  cat.setAttribute("role", "button");
+  cat.setAttribute(
+    "aria-label",
+    index === 0 ? "Pet the first cat" : "Pet the second cat"
+  );
+
+  function petCat() {
+    cat.style.filter = "brightness(1.5)";
+    window.setTimeout(function () {
+      cat.style.filter = "";
+    }, 350);
+
+    const dialog = document.getElementById("message-dialog");
+    const title = document.getElementById("dialog-title");
+    const body = document.getElementById("dialog-message");
+
+    if (title && body && dialog) {
+      title.textContent = "Meow! ♡";
+      body.textContent = index === 0
+        ? "A little purr just for you. You're loved! ♡"
+        : "Meow meow! Don't forget to make a birthday wish. ♡";
+
+      if (!dialog.open && typeof dialog.showModal === "function") {
+        dialog.showModal();
+      }
+    }
+  }
+
+  cat.addEventListener("click", petCat);
+
+  cat.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      petCat();
+    }
+  });
+});
   </script>
 </body>
 </html>
