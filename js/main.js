@@ -148,50 +148,40 @@ function randomBetween(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+
 function createDecoration(className, symbol, index) {
-  if (!elements.decorations) {
-    return;
-  }
+  const container = document.getElementById("welcome-decorations");
+  if (!container) return;
 
   const decoration = document.createElement("span");
 
   decoration.className = className;
   decoration.textContent = symbol;
-
-  decoration.style.left = `${randomBetween(3, 97)}%`;
-  decoration.style.top = `${randomBetween(3, 97)}%`;
-  decoration.style.fontSize = `${randomBetween(10, 23)}px`;
-  decoration.style.animationDelay = `${-randomBetween(0, 5)}s`;
-  decoration.style.animationDuration = `${randomBetween(2, 6)}s`;
-
   decoration.dataset.decorationIndex = String(index);
 
-  elements.decorations.appendChild(decoration);
+  // Position each particle relative to the decoration layer.
+  decoration.style.position = "absolute";
+  decoration.style.left = `${Math.random() * 94 + 3}%`;
+  decoration.style.top = `${Math.random() * 94 + 3}%`;
+  decoration.style.fontSize = `${Math.random() * 13 + 10}px`;
+
+  // Independent floating animation for each particle.
+  decoration.style.animationDelay = `${-(Math.random() * 5)}s`;
+  decoration.style.animationDuration = `${2 + Math.random() * 4}s`;
+
+  // Keep the particle independent of the homepage card layout.
+  decoration.style.display = "block";
+  decoration.style.width = "max-content";
+  decoration.style.height = "max-content";
+  decoration.style.margin = "0";
+  decoration.style.padding = "0";
+  decoration.style.lineHeight = "1";
+  decoration.style.pointerEvents = "none";
+  decoration.style.zIndex = "1";
+
+  container.appendChild(decoration);
 }
 
-function createWelcomeDecorations() {
-  if (!elements.decorations) {
-    return;
-  }
-
-  elements.decorations.replaceChildren();
-
-  const decorations = [
-    { className: "pixel-star", symbol: "✦" },
-    { className: "floating-heart", symbol: "♥" },
-    { className: "floating-sparkle", symbol: "✧" }
-  ];
-
-  for (let index = 0; index < APP_CONFIG.decorationCount; index++) {
-    const decoration = decorations[index % decorations.length];
-
-    createDecoration(
-      decoration.className,
-      decoration.symbol,
-      index
-    );
-  }
-}
 
 
 /* ENTER THE ROOM */
