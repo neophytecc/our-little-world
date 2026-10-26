@@ -189,16 +189,23 @@ function createWelcomeDecorations() {
   ];
 
   for (let i = 0; i < APP_CONFIG.decorationCount; i++) {
-    const decoration = decorations[i % decorations.length];
+    const item = decorations[i % decorations.length];
+    const decoration = document.createElement("span");
 
-    createDecoration(
-      decoration.className,
-      decoration.symbol,
-      i
-    );
+    decoration.className = item.className;
+    decoration.textContent = item.symbol;
+    decoration.style.position = "absolute";
+    decoration.style.left = `${Math.random() * 94 + 3}%`;
+    decoration.style.top = `${Math.random() * 94 + 3}%`;
+    decoration.style.fontSize = `${Math.random() * 13 + 10}px`;
+    decoration.style.animationDelay = `${-(Math.random() * 5)}s`;
+    decoration.style.animationDuration = `${2 + Math.random() * 4}s`;
+    decoration.style.pointerEvents = "none";
+    decoration.style.zIndex = "1";
+
+    container.appendChild(decoration);
   }
 }
-
 
 /* ENTER THE ROOM */
 
