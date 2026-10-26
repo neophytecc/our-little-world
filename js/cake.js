@@ -122,7 +122,7 @@
       const now = performance.now();
 
       // Adjust this threshold for your microphone's sensitivity.
-      if (volume > 0.12) {
+      if (volume > 0.06) {
         if (!blowStarted) blowStarted = now;
 
         if (
