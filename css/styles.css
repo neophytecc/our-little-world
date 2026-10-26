@@ -2849,7 +2849,7 @@ body {
 
 #room-scene #cake-area .cake-illustration {
   display: block;
-  width: clamp(2.5rem, 10cqw, 6rem);
+  width: clamp(3rem, 12cqw, 7rem);
   max-width: 100%;
   height: auto;
   aspect-ratio: 1;
