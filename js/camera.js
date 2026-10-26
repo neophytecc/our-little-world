@@ -157,10 +157,10 @@
     );
     ctx.restore();
 
-    const brand = "@littlewebworld";
+    const brand = "@lovebub";
     const theme = window.BIRTHDAY_THEME || {};
     const wish = String(
-      theme.boothLabel || theme.name || "happy birthday"
+      theme.boothLabel || theme.name || "Happy Birthday"
     ).slice(0, 24);
 
     const pad = 8;
