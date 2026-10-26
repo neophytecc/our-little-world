@@ -3208,3 +3208,27 @@ body {
     opacity: 1;
   }
 }
+
+
+/* FIX: Make the Enter button's section switching work */
+#welcome-screen[hidden],
+#birthday-room[hidden],
+#memories-panel[hidden],
+#photobooth-panel[hidden],
+#booth-canvas[hidden],
+#booth-preview[hidden],
+#booth-retake[hidden],
+#booth-download[hidden],
+#toast[hidden] {
+  display: none !important;
+}
+
+/* Keep the homepage centered when it is visible */
+#welcome-screen:not([hidden]) {
+  display: grid;
+}
+
+/* Show the birthday room only after Enter is clicked */
+#birthday-room:not([hidden]) {
+  display: flex;
+}
