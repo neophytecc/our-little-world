@@ -3004,7 +3004,7 @@ body {
 
   #room-scene #cake-area {
     width: 21%;
-    bottom: 17%;
+    bottom: 14%;
   }
 
   #room-scene #room-cats {
@@ -3241,11 +3241,11 @@ body {
 #room-scene #cake-area .cake-button::after {
   content: "🔥 🔥 🔥";
   position: absolute;
-  top: 18%;
+  top: 5%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
-  font-size: clamp(6px, 1.1cqw, 10px);
+  font-size: clamp(5px, 0.8cqw, 8px);
   letter-spacing: -2px;
   line-height: 1;
   white-space: nowrap;
