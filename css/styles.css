@@ -3268,3 +3268,68 @@ body {
   }
 }
 
+
+/* ===== SCATTER BALLOONS ACROSS THE ROOM ===== */
+#room-scene #balloon-area {
+  position: absolute;
+  top: 10%;
+  left: 3%;
+  width: 94%;
+  height: 58%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+#room-scene #balloon-area .birthday-balloon {
+  position: absolute !important;
+  width: clamp(38px, 7cqw, 68px) !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  pointer-events: auto;
+}
+
+/* Balloon 1 — upper left */
+#room-scene #balloon-area .birthday-balloon:nth-child(1) {
+  left: 5% !important;
+  top: 12% !important;
+}
+
+/* Balloon 2 — middle left */
+#room-scene #balloon-area .birthday-balloon:nth-child(2) {
+  left: 23% !important;
+  top: 48% !important;
+}
+
+/* Balloon 3 — upper middle */
+#room-scene #balloon-area .birthday-balloon:nth-child(3) {
+  left: 43% !important;
+  top: 5% !important;
+}
+
+/* Balloon 4 — lower middle */
+#room-scene #balloon-area .birthday-balloon:nth-child(4) {
+  left: 60% !important;
+  top: 40% !important;
+}
+
+/* Balloon 5 — upper right */
+#room-scene #balloon-area .birthday-balloon:nth-child(5) {
+  left: 77% !important;
+  top: 15% !important;
+}
+
+/* Balloon 6 — far right */
+#room-scene #balloon-area .birthday-balloon:nth-child(6) {
+  left: 88% !important;
+  top: 52% !important;
+}
+
+/* Keep balloon pictures proportional */
+#room-scene #balloon-area .balloon-image {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain;
+}
