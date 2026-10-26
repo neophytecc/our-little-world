@@ -3232,3 +3232,39 @@ body {
 #birthday-room:not([hidden]) {
   display: flex;
 }
+
+
+/* ===== BLOWABLE CAKE FLAMES ===== */
+#room-scene #cake-area .cake-button {
+  position: relative;
+}
+
+#room-scene #cake-area .cake-button::after {
+  content: "🔥 🔥 🔥";
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  font-size: clamp(7px, 1.5cqw, 14px);
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: candle-flicker 0.45s infinite alternate;
+}
+
+#room-scene #cake-area .cake-button.blown::after {
+  content: "";
+  display: none;
+}
+
+@keyframes candle-flicker {
+  from {
+    opacity: 0.8;
+    filter: brightness(0.9);
+  }
+  to {
+    opacity: 1;
+    filter: brightness(1.2);
+  }
+}
