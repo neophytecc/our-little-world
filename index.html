@@ -323,7 +323,87 @@ document.querySelectorAll("#room-cats .room-cat").forEach(function (cat, index) 
     }
   });
 });
+
+    
+    // FIX: Memories & Wishes should not reload the page.
+    (function () {
+      const form = document.getElementById("memory-form");
+      const wall = document.getElementById("memory-wall");
+      const messageInput = document.getElementById("memory-message");
+      const typeInput = document.getElementById("memory-type");
+      const colorInput = document.getElementById("memory-color");
+      const counter = document.getElementById("character-count");
+      const storageKey = "our-little-world-memories";
+
+      if (!form || !wall || !messageInput) return;
+
+      function getSavedMemories() {
+        try {
+          return JSON.parse(localStorage.getItem(storageKey) || "[]");
+        } catch (error) {
+          return [];
+        }
+      }
+
+      function renderMemories() {
+        wall.replaceChildren();
+
+        getSavedMemories().forEach(function (memory) {
+          const note = document.createElement("article");
+          note.className = "memory-note " + memory.color;
+
+          const label = document.createElement("strong");
+          label.textContent =
+            memory.type === "wish" ? "Birthday Wish ♡" : "Favorite Memory ♡";
+
+          const message = document.createElement("p");
+          message.textContent = memory.message;
+
+          note.append(label, message);
+          wall.appendChild(note);
+        });
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const message = messageInput.value.trim();
+        if (!message) return;
+
+        const memories = getSavedMemories();
+
+        memories.push({
+          type: typeInput.value,
+          message: message.slice(0, 120),
+          color: colorInput.value
+        });
+
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(memories));
+        } catch (error) {
+          alert("Your note could not be saved in this browser.");
+          return;
+        }
+
+        renderMemories();
+        form.reset();
+
+        if (counter) counter.textContent = "0";
+
+        if (window.LittleWorld) {
+          window.LittleWorld.showToast("Your note is pinned to the wall! ♡");
+        }
+
+        // Keep the birthday room open and the Memories panel visible.
+      });
+
+      messageInput.addEventListener("input", function () {
+        if (counter) counter.textContent = messageInput.value.length;
+      });
+
+      renderMemories();
+    })();
+    
   </script>
 </body>
 </html>
-```
