@@ -3004,7 +3004,7 @@ body {
 
   #room-scene #cake-area {
     width: 21%;
-    bottom: 22%;
+    bottom: 17%;
   }
 
   #room-scene #room-cats {
@@ -3233,8 +3233,7 @@ body {
   display: flex;
 }
 
-
-/* ===== BLOWABLE CAKE FLAMES ===== */
+/* ===== BLOWABLE CAKE FLAMES - POSITION FIX ===== */
 #room-scene #cake-area .cake-button {
   position: relative;
 }
@@ -3242,11 +3241,12 @@ body {
 #room-scene #cake-area .cake-button::after {
   content: "🔥 🔥 🔥";
   position: absolute;
-  top: 2%;
+  top: 18%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
-  font-size: clamp(7px, 1.5cqw, 14px);
+  font-size: clamp(6px, 1.1cqw, 10px);
+  letter-spacing: -2px;
   line-height: 1;
   white-space: nowrap;
   pointer-events: none;
@@ -3254,8 +3254,7 @@ body {
 }
 
 #room-scene #cake-area .cake-button.blown::after {
-  content: "";
-  display: none;
+  content: none;
 }
 
 @keyframes candle-flicker {
@@ -3268,3 +3267,4 @@ body {
     filter: brightness(1.2);
   }
 }
+
