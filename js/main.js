@@ -148,7 +148,33 @@ function randomBetween(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+function createDecoration(className, symbol, index) {
+  const container = document.getElementById("welcome-decorations");
+  if (!container) return;
 
+  const decoration = document.createElement("span");
+
+  decoration.className = className;
+  decoration.textContent = symbol;
+  decoration.dataset.decorationIndex = String(index);
+
+  decoration.style.position = "absolute";
+  decoration.style.left = `${Math.random() * 94 + 3}%`;
+  decoration.style.top = `${Math.random() * 94 + 3}%`;
+  decoration.style.fontSize = `${Math.random() * 13 + 10}px`;
+  decoration.style.animationDelay = `${-(Math.random() * 5)}s`;
+  decoration.style.animationDuration = `${2 + Math.random() * 4}s`;
+  decoration.style.display = "block";
+  decoration.style.width = "max-content";
+  decoration.style.height = "max-content";
+  decoration.style.margin = "0";
+  decoration.style.padding = "0";
+  decoration.style.lineHeight = "1";
+  decoration.style.pointerEvents = "none";
+  decoration.style.zIndex = "1";
+
+  container.appendChild(decoration);
+}
 
 function createWelcomeDecorations() {
   const container = document.getElementById("welcome-decorations");
@@ -163,8 +189,7 @@ function createWelcomeDecorations() {
   ];
 
   for (let i = 0; i < APP_CONFIG.decorationCount; i++) {
-    const decoration =
-      decorations[i % decorations.length];
+    const decoration = decorations[i % decorations.length];
 
     createDecoration(
       decoration.className,
@@ -173,6 +198,7 @@ function createWelcomeDecorations() {
     );
   }
 }
+
 
 /* ENTER THE ROOM */
 
