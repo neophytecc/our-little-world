@@ -191,5 +191,3 @@ if (document.readyState === "loading") {
   initCake();
 }
 })();
-
-document.addEventListener("DOMContentLoaded", initCake);
