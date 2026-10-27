@@ -61,6 +61,31 @@ YouTube background music, controlled by the existing SOUND button.
       },
       events: {
         onReady: function (event) {
+          // Apply hiding directly to YouTube's generated iframe as well as its wrapper.
+          const wrapper = document.getElementById("youtube-music-player-wrapper");
+          const iframe = event.target.getIframe();
+          if (wrapper) {
+            wrapper.hidden = false;
+            wrapper.style.setProperty("position", "fixed", "important");
+            wrapper.style.setProperty("width", "1px", "important");
+            wrapper.style.setProperty("height", "1px", "important");
+            wrapper.style.setProperty("left", "-10000px", "important");
+            wrapper.style.setProperty("top", "0", "important");
+            wrapper.style.setProperty("overflow", "hidden", "important");
+            wrapper.style.setProperty("visibility", "hidden", "important");
+            wrapper.style.setProperty("opacity", "0", "important");
+          }
+          if (iframe) {
+            iframe.setAttribute("aria-hidden", "true");
+            iframe.style.setProperty("position", "fixed", "important");
+            iframe.style.setProperty("width", "1px", "important");
+            iframe.style.setProperty("height", "1px", "important");
+            iframe.style.setProperty("left", "-10000px", "important");
+            iframe.style.setProperty("top", "0", "important");
+            iframe.style.setProperty("visibility", "hidden", "important");
+            iframe.style.setProperty("opacity", "0", "important");
+            iframe.style.setProperty("pointer-events", "none", "important");
+          }
           event.target.mute();
           event.target.playVideo();
           if (soundEnabled) event.target.unMute();
