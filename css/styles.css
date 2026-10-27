@@ -3335,20 +3335,24 @@ body {
 }
 
 
-/* Invisible YouTube player for background music */
-.youtube-music-player {
-  position: fixed;
-  width: 1px;
-  height: 1px;
-  left: -10000px;
-  top: 0;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.youtube-music-player iframe {
-  width: 1px;
-  height: 1px;
-  border: 0;
+/* Keep the YouTube API's replacement iframe completely off-screen. */
+.youtube-music-player-wrapper,
+#youtube-music-player-wrapper,
+#youtube-music-player-wrapper iframe,
+#youtube-music-player {
+  position: fixed !important;
+  width: 1px !important;
+  height: 1px !important;
+  min-width: 1px !important;
+  min-height: 1px !important;
+  max-width: 1px !important;
+  max-height: 1px !important;
+  left: -10000px !important;
+  top: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
 }
