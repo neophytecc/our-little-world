@@ -16,7 +16,6 @@ YouTube background music, controlled by the existing SOUND button.
   if (!mount) return;
 
   let player = null;
-  let apiReady = false;
   let soundEnabled = Boolean(
     window.LittleWorld && window.LittleWorld.soundEnabled
   );
@@ -32,7 +31,6 @@ YouTube background music, controlled by the existing SOUND button.
     }
 
     window.onYouTubeIframeAPIReady = function () {
-      apiReady = true;
       createPlayer();
     };
 
@@ -55,26 +53,22 @@ YouTube background music, controlled by the existing SOUND button.
       height: "225",
       videoId: VIDEO_ID,
       playerVars: {
-        autoplay: 0,
-        controls: 1,
+        autoplay: 1,
+        controls: 0,
         playsinline: 1,
-        rel: 0
+        rel: 0,
+        mute: 1
       },
       events: {
         onReady: function (event) {
-          setStatus("Tap SOUND OFF above to play the music.");
-          if (soundEnabled) {
-            event.target.playVideo();
-          }
+          event.target.mute();
+          event.target.playVideo();
+          if (soundEnabled) event.target.unMute();
         },
         onStateChange: function (event) {
           if (!window.YT || !window.YT.PlayerState) return;
-          if (event.data === window.YT.PlayerState.PLAYING) {
-            setStatus("Now playing ♡");
-          } else if (event.data === window.YT.PlayerState.PAUSED) {
-            setStatus("Music paused.");
-          } else if (event.data === window.YT.PlayerState.ENDED) {
-            setStatus("Song finished. Tap play to listen again.");
+          if (event.data === window.YT.PlayerState.PLAYING && soundEnabled) {
+            event.target.unMute();
           }
         },
         onError: function () {
@@ -107,7 +101,10 @@ YouTube background music, controlled by the existing SOUND button.
   });
 
   // Wait until the birthday room is visible so YouTube can measure the player.
-  window.addEventListener("littleworld:entered", loadYouTubeApi);
+  window.addEventListener("littleworld:entered", function () {
+    soundEnabled = true;
+    loadYouTubeApi();
+  });
 
   if (window.LittleWorld && window.LittleWorld.hasEnteredRoom) {
     loadYouTubeApi();
