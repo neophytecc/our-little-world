@@ -220,6 +220,11 @@ function enterRoom() {
 
   state.hasEnteredRoom = true;
 
+  // Start background music when the visitor enters the room.
+  state.soundEnabled = true;
+  writeStorage(APP_CONFIG.soundStorageKey, "true");
+  updateSoundButton();
+
   if (elements.enterButton) {
     elements.enterButton.disabled = true;
   }
