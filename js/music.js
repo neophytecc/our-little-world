@@ -106,5 +106,10 @@ YouTube background music, controlled by the existing SOUND button.
     }
   });
 
-  loadYouTubeApi();
+  // Wait until the birthday room is visible so YouTube can measure the player.
+  window.addEventListener("littleworld:entered", loadYouTubeApi);
+
+  if (window.LittleWorld && window.LittleWorld.hasEnteredRoom) {
+    loadYouTubeApi();
+  }
 })();
