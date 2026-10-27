@@ -21,6 +21,7 @@
   <script src="js/balloons.js" defer></script>
   <script src="js/cake.js" defer></script>
   <script src="js/main.js" defer></script>
+  <script src="js/music.js" defer></script>
 </head>
 
 <body>
@@ -65,6 +66,17 @@
           </button>
         </div>
       </header>
+
+      <!-- YouTube background music player -->
+      <section class="music-card" aria-labelledby="music-title">
+        <div class="music-card-copy">
+          <p class="eyebrow">A LITTLE SOUNDTRACK ♡</p>
+          <h2 id="music-title">Our Song</h2>
+          <p id="music-status" role="status" aria-live="polite">Tap SOUND OFF above to play the music.</p>
+        </div>
+        <div id="youtube-music-player" class="youtube-music-player" aria-label="YouTube music player"></div>
+        <p class="music-credit">Music plays from YouTube. Video controls are available above.</p>
+      </section>
 
       <div class="room-intro">
         <p class="eyebrow">YOU ARE HOME</p>
